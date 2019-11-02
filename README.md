@@ -18,7 +18,7 @@
 
 ****************************************************
 
- Working NoSquint Plus addon for Waterfox Current and Firefox 58-68 (Developer Edition, Nightly or unbranded). Based on NoSquint Plus 56.1. Doesn't fit for versions of Firefox: Release, ESR, Beta (they can't install non-WE addons).
+ Working NoSquint Plus addon for Waterfox Current 2019 and Firefox 58-68 (Developer Edition, Nightly or unbranded). Based on NoSquint Plus 56.1. Doesn't fit for versions of Firefox: Release, ESR, Beta (they can't install non-WE addons).
 
  NoSquint has "killer feature" as compared with other zoom addons: NoSquint allows to set independent full and text zoom levels simultaneously and remembers these settings for sites. Another addon that can complement with NoSquint: https://addons.mozilla.org/en-US/firefox/addon/custom-page-zoom/ . It uses different zoom method.
 
@@ -32,4 +32,4 @@
 
  For installation download xpi-file and open it in browser.
 
- You can also download version 56.1(L) for Waterfox Classic and Firefox <=56. It's original NoSquint Plus 56.1 with modification: 1) "Time bomb" removed; 2) Autoupdating is disabled; 3) Russian localization added.
+ You can also download version 56.1(L) for Waterfox Classic and Firefox <=56. It's original NoSquint Plus 56.1 with modifications: 1) "Time bomb" removed; 2) Autoupdating is disabled; 3) Russian localization added.
