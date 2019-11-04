@@ -1,0 +1,8 @@
+body{
+	font-family: Tinos, 'Times New Roman', serif !important;
+}
+
+input.minicolor{
+	border: none !important;
+	width: 64px !important;
+}
