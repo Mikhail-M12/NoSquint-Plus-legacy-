@@ -3,7 +3,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>zoomlevelplus@zoomlevelplus.net</em:id>
 		<em:name>NoSquint Plus</em:name>
-		<em:version>56.1.2019</em:version>
+		<em:version>56.1.2019.0.1</em:version>
 		<em:description>Manage site-specific zoom levels and color settings.</em:description>
 		<em:type>2</em:type>
 		<em:bootstrap>true</em:bootstrap>
