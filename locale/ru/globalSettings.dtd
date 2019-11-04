@@ -1,0 +1,40 @@
+<!ENTITY globalSettings.groupGeneralTitle "Настройки для сайта (цвет и масштаб)">
+<!ENTITY globalSettings.rememberSitesOn "Запоминать настройки для сайта между перезапусками браузера">
+<!ENTITY globalSettings.rememberSitesOff "Забывать все настройки для сайтов, когда браузер закрывается">
+<!ENTITY globalSettings.forgetMonthEnabled "Забывать настройки для сайтов, не посещавшихся в последний(е)">
+<!ENTITY globalSettings.forgetMonth12 "год">
+<!ENTITY globalSettings.forgetMonth6 "6 месяцев">
+<!ENTITY globalSettings.forgetMonth3 "3 месяца">
+<!ENTITY globalSettings.forgetMonth1 "месяц">
+
+<!ENTITY globalSettings.groupZoomTitle "Опции масштабирования по умолчанию">
+<!ENTITY globalSettings.fullZoomPrimary "Главный метод масштабирования">
+<!ENTITY globalSettings.fullZoomPrimaryOn "Полный масштаб страницы (картинки и текст)">
+<!ENTITY globalSettings.fullZoomPrimaryOff "Масштаб текста (только текст)">
+<!ENTITY globalSettings.defaultFullZoom "Полный масштаб страницы по умолчанию">
+<!ENTITY globalSettings.defaultTextZoom "Текстовый масштаб страницы по умолчанию">
+<!ENTITY globalSettings.zoomIncrement "Инкремент масштабирования">
+<!ENTITY globalSettings.wheelZoom "Включить масштабирование колесом мыши при нажатой Ctrl">
+
+<!ENTITY globalSettings.groupColorTitle "Цвета">
+<!ENTITY globalSettings.textAndBackgroundTitle "Текст и фон">
+<!ENTITY globalSettings.textColorEnabledLabel "Текст">
+<!ENTITY globalSettings.backgroundColorEnabledLabel "Фон">
+<!ENTITY globalSettings.imageBackgroundEnabledLabel "Отключить фоновое изображение">
+<!ENTITY globalSettings.linksTitle "Цвета ссылок">
+<!ENTITY globalSettings.linksUnvisitedEnabledLabel "Непосещённые">
+<!ENTITY globalSettings.linksVisitedEnabledLabel "Посещённые">
+<!ENTITY globalSettings.linksUnderlineEnabledLabel "Всегда подчёркивать ссылки">
+
+<!ENTITY globalSettings.groupExceptionsTitle "Правила">
+<!ENTITY globalSettings.addExceptionButton "Добавить">
+<!ENTITY globalSettings.editExceptionButton "Редактировать">
+<!ENTITY globalSettings.deleteExceptionButton "Удалить">
+
+<!ENTITY globalSettings.groupExcludedSitesTitle "Исключённые сайты">
+<!ENTITY globalSettings.deleteExcludedSiteButton "Удалить">
+
+<!ENTITY globalSettings.okButton "ОК">
+<!ENTITY globalSettings.cancelButton "Отмена">
+
+<!ENTITY globalSettings.zoomIndicatorsEnabledLabel "Показывать масштабы рядом с кнопкой">
