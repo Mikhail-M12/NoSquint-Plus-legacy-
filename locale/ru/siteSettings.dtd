@@ -1,0 +1,17 @@
+<!ENTITY siteSettings.title "Настройки сайта">
+<!ENTITY siteSettings.fullZoomLabel "  Полный масштаб:">
+<!ENTITY siteSettings.textZoomLabel "Текстовый масштаб:">
+<!ENTITY siteSettings.useDefault "По умолч.">
+<!ENTITY siteSettings.textAndBackgroundTitle "Текст и фон">
+<!ENTITY siteSettings.textColorEnabledLabel "Текст">
+<!ENTITY siteSettings.backgroundColorEnabledLabel "Фон">
+<!ENTITY siteSettings.imageBackgroundEnabledLabel "Отключить фоновое изображение">
+<!ENTITY siteSettings.linksTitle "Цвета ссылок">
+<!ENTITY siteSettings.linksUnvisitedEnabledLabel "Непосещённые">
+<!ENTITY siteSettings.linksVisitedEnabledLabel "Посещённые">
+<!ENTITY siteSettings.linksUnderlineEnabledLabel "Всегда подчёркивать ссылки">
+<!ENTITY siteSettings.isSiteExcludedLabel "Не применять к сайту глоб. настройки">
+<!ENTITY siteSettings.globalSettingsButton "Глобальные настройки">
+<!ENTITY siteSettings.okButton "ОК">
+<!ENTITY siteSettings.cancelButton "Отмена">
+<!ENTITY siteSettings.newhomelink "Автообновлений нет. Домашняя страница:">
