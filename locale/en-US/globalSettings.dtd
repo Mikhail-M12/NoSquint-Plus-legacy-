@@ -1,0 +1,38 @@
+<!ENTITY globalSettings.groupGeneralTitle "Per-site settings (color and zoom)">
+<!ENTITY globalSettings.rememberSitesOn "Remember per-site settings between Firefox restarts">
+<!ENTITY globalSettings.rememberSitesOff "Forget all per-site settings when Firefox closes">
+<!ENTITY globalSettings.forgetMonthEnabled "Forget settings for sites not visited in the last">
+<!ENTITY globalSettings.forgetMonth12 "Year">
+<!ENTITY globalSettings.forgetMonth6 "Six Months">
+<!ENTITY globalSettings.forgetMonth3 "Three Months">
+<!ENTITY globalSettings.forgetMonth1 "Month">
+
+<!ENTITY globalSettings.groupZoomTitle "Default Zoom Options">
+<!ENTITY globalSettings.fullZoomPrimary "Primary zoom method">
+<!ENTITY globalSettings.fullZoomPrimaryOn "Full Page Zoom (images and text)">
+<!ENTITY globalSettings.fullZoomPrimaryOff "Text Zoom (text only)">
+<!ENTITY globalSettings.defaultFullZoom "Default full page zoom level">
+<!ENTITY globalSettings.defaultTextZoom "Default text-only zoom level">
+<!ENTITY globalSettings.zoomIncrement "Zoom increment">
+<!ENTITY globalSettings.wheelZoom "Enable zoom with ctrl-mousewheel">
+
+<!ENTITY globalSettings.groupColorTitle "Colors">
+<!ENTITY globalSettings.textAndBackgroundTitle "Text and background">
+<!ENTITY globalSettings.textColorEnabledLabel "Text">
+<!ENTITY globalSettings.backgroundColorEnabledLabel "Background">
+<!ENTITY globalSettings.imageBackgroundEnabledLabel "Disable background image">
+<!ENTITY globalSettings.linksTitle "Link colors">
+<!ENTITY globalSettings.linksUnvisitedEnabledLabel "Unvisited">
+<!ENTITY globalSettings.linksVisitedEnabledLabel "Visited">
+<!ENTITY globalSettings.linksUnderlineEnabledLabel "Always underline links">
+
+<!ENTITY globalSettings.groupExceptionsTitle "Rules">
+<!ENTITY globalSettings.addExceptionButton "Add">
+<!ENTITY globalSettings.editExceptionButton "Edit">
+<!ENTITY globalSettings.deleteExceptionButton "Delete">
+
+<!ENTITY globalSettings.groupExcludedSitesTitle "Excluded sites">
+<!ENTITY globalSettings.deleteExcludedSiteButton "Delete">
+
+<!ENTITY globalSettings.okButton "Ok">
+<!ENTITY globalSettings.cancelButton "Cancel">
