@@ -1,0 +1,233 @@
+<!DOCTYPE html SYSTEM "chrome://zoomlevel/locale/siteSettings.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=us-ascii"/>
+    <title>NoSquint Plus Site Settings</title>
+    <script src="chrome://zoomlevel/content/external/jquery/jquery-2.2.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="chrome://zoomlevel/content/external/minicolors/jquery.minicolors.css"/>
+    <script src="chrome://zoomlevel/content/external/minicolors/jquery.minicolors.min.js"></script>
+    <script>
+        $(function () {
+            $(".minicolor").each(function () {
+                var $this = $(this);
+                var self = this;
+                $this.minicolors({
+                    control: "wheel",
+                    change: function () {
+                        var evt = document.createEvent("HTMLEvents");
+                        evt.initEvent("input", true, true);
+                        self.dispatchEvent(evt);
+                    }
+                });
+
+                var interval = setInterval(function () {
+                    var val = $this.val();
+                    if (val !== "") {
+						//$this.minicolors("value", val);
+						$this.next("span").find(".minicolors-swatch-color").css( "background-color", val );
+                        clearInterval(interval);
+                    }
+                }, 20);
+            });
+        });
+    </script>
+    <style>
+        .content {
+            width: 540px;
+            /*height: 330px;*/
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -165px;
+            margin-left: -270px;
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            background-color: #D0D7F2;
+			box-shadow: 0 0 1em gray;
+        }
+
+        .closeButton {
+            font-size: 22px;
+            position: absolute;
+            right: 10px;
+            top: 2px;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .closeButton:hover {
+            font-weight: 700;
+        }
+
+        .title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .row {
+            margin: 10px 0;
+        }
+
+        .col6 {
+            float: left;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .col-left {
+            float: left;
+        }
+
+        .col-right {
+            float: right;
+        }
+
+        .useDefault {
+            margin-left: 7px;
+        }
+
+        input[type="range"] {
+            vertical-align: middle;
+            width: 180px;
+        }
+
+        input[type="number"] {
+            vertical-align: middle;
+            margin-right: 4px;
+            width: 50px;
+        }
+
+        input.minicolor {
+            width: 50px;
+            height: 26px !important;
+        }
+
+        fieldset {
+            border-color: #606060;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div id="close" class="closeButton">×</div>
+    <div class="title">&siteSettings.title;</div>
+    <fieldset>
+        <legend id="siteURL"></legend>
+        <div class="row">
+            <label for="fullZoom">&siteSettings.fullZoomLabel;</label>
+            <input id="fullZoomRange" type="range" min="40" max="300" step="5" value="100"/>
+            <input id="fullZoom" type="number" min="40" max="300" step="5" value="100"/>%
+            <button id="fullZoomUseDefault" class="useDefault">&siteSettings.useDefault;</button>
+        </div>
+        <div class="row">
+            <label for="textZoom">&siteSettings.textZoomLabel;</label>
+            <input id="textZoomRange" type="range" min="40" max="300" step="5" value="100"/>
+            <input id="textZoom" type="number" min="40" max="300" step="5" value="100"/>%
+            <button id="textZoomUseDefault" class="useDefault">&siteSettings.useDefault;</button>
+        </div>
+        <div class="row">
+            <div class="col6">
+                <fieldset>
+                    <legend>&siteSettings.textAndBackgroundTitle;</legend>
+                    <table>
+                        <tr>
+                            <td>
+                                <input id="textColorEnabled" type="checkbox"/>
+                            </td>
+                            <td>
+                                <label for="textColorEnabled">&siteSettings.textColorEnabledLabel;</label>
+                            </td>
+                            <td>
+                                <input id="textColor" type="text" disabled="disabled" class="minicolor"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="backgroundColorEnabled" type="checkbox"/>
+                            </td>
+                            <td>
+                                <label for="backgroundColorEnabled">&siteSettings.backgroundColorEnabledLabel;</label>
+                            </td>
+                            <td>
+                                <input id="backgroundColor" type="text" disabled="disabled" class="minicolor"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="imageBackgroundEnabled" type="checkbox"/>
+                            </td>
+                            <td>
+                                <label for="imageBackgroundEnabled">&siteSettings.imageBackgroundEnabledLabel;</label>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+            <div class="col6">
+                <fieldset>
+                    <legend>&siteSettings.linksTitle;</legend>
+                    <table>
+                        <tr>
+                            <td>
+                                <input id="linksUnvisitedEnabled" type="checkbox"/>
+                            </td>
+                            <td>
+                                <label for="linksUnvisitedEnabled">&siteSettings.linksUnvisitedEnabledLabel;</label>
+                            </td>
+                            <td>
+                                <input id="linksUnvisited" type="text" disabled="disabled" class="minicolor"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="linksVisitedEnabled" type="checkbox"/>
+                            </td>
+                            <td>
+                                <label for="linksVisitedEnabled">&siteSettings.linksVisitedEnabledLabel;</label>
+                            </td>
+                            <td>
+                                <input id="linksVisited" type="text" disabled="disabled" class="minicolor"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="linksUnderlineEnabled" type="checkbox"/>
+                            </td>
+                            <td>
+                                <label for="linksUnderlineEnabled">&siteSettings.linksUnderlineEnabledLabel;</label>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
+    </fieldset>
+    <div class="row">
+        <div class="col-left">
+            <button id="globalSettings">&siteSettings.globalSettingsButton;</button>
+        </div>
+        <div class="col-right">
+            <input id="isSiteExcluded" type="checkbox"/>
+            <label for="isSiteExcluded">&siteSettings.isSiteExcludedLabel;</label>
+            <button id="ok">&siteSettings.okButton;</button>
+            <button id="cancel">&siteSettings.cancelButton;</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-left">
+            <div style="text-align:center;margin-top:8px;width:540px;">
+				<img src="chrome://zoomlevel/skin/get.png" style="display:none;" />
+				<img id="get_chrome" src="chrome://zoomlevel/skin/ChromeWebStore_BadgeWBorder_v2_206x58.png" style="height:60px;cursor:pointer;"/>
+				<img id="get_opera" src="chrome://zoomlevel/skin/addons_206x58_en@2x.png" style="height:60px;cursor:pointer;"/>
+			</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
