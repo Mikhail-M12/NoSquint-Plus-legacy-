@@ -1,0 +1,45 @@
+#toolbar-zoomlevel-maintoolbarbutton {
+      list-style-image: url("chrome://zoomlevel/skin/icon16.png");
+}
+#toolbar-zoomlevel-maintoolbarbutton >  box > label{
+      margin-top:0;
+	  margin-bottom:0;
+}
+#toolbar-zoomlevel-maintoolbarbutton >  box > label.hiddenlabel{
+      display:none;
+}
+#toolbar-zoomlevel-zoomIn {
+      list-style-image: url("chrome://zoomlevel/skin/icon-zoomIn-24.png");
+}
+
+toolbar[iconsize="small"] #toolbar-zoomlevel-zoomIn {
+      list-style-image: url("chrome://zoomlevel/skin/icon-zoomIn-16.png");
+}
+
+#toolbar-zoomlevel-zoomOut {
+      list-style-image: url("chrome://zoomlevel/skin/icon-zoomOut-24.png");
+}
+
+toolbar[iconsize="small"] #toolbar-zoomlevel-zoomOut {
+      list-style-image: url("chrome://zoomlevel/skin/icon-zoomOut-16.png");
+}
+
+#toolbar-zoomlevel-zoomReset {
+      list-style-image: url("chrome://zoomlevel/skin/icon-zoomReset-24.png");
+}
+
+toolbar[iconsize="small"] #toolbar-zoomlevel-zoomReset {
+      list-style-image: url("chrome://zoomlevel/skin/icon-zoomReset-16.png");
+}
+
+#contextmenu-zoomlevel-siteSettings {
+      list-style-image: url("chrome://zoomlevel/skin/icon16.png");
+}
+
+#urlbar-zoom-button{
+  display:none !important;
+}
+
+#toolbar-zoomlevel-maintoolbarbutton >  box > image.hiddenimage{
+      display:none;
+}
