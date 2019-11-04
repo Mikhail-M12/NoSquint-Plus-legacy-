@@ -1,0 +1,17 @@
+<!ENTITY siteSettings.title "Site Settings">
+<!ENTITY siteSettings.fullZoomLabel " Full zoom level:">
+<!ENTITY siteSettings.textZoomLabel "Text zoom level:">
+<!ENTITY siteSettings.useDefault "Use default">
+<!ENTITY siteSettings.textAndBackgroundTitle "Text and background">
+<!ENTITY siteSettings.textColorEnabledLabel "Text">
+<!ENTITY siteSettings.backgroundColorEnabledLabel "Background">
+<!ENTITY siteSettings.imageBackgroundEnabledLabel "Disable background image">
+<!ENTITY siteSettings.linksTitle "Link colors">
+<!ENTITY siteSettings.linksUnvisitedEnabledLabel "Unvisited">
+<!ENTITY siteSettings.linksVisitedEnabledLabel "Visited">
+<!ENTITY siteSettings.linksUnderlineEnabledLabel "Always underline links">
+<!ENTITY siteSettings.isSiteExcludedLabel "exclude site for global settings">
+<!ENTITY siteSettings.globalSettingsButton "Global settings">
+<!ENTITY siteSettings.okButton "Ok">
+<!ENTITY siteSettings.cancelButton "Cancel">
+<!ENTITY siteSettings.newhomelink "No&#160;autoupdates.&#160;Homepage:">
