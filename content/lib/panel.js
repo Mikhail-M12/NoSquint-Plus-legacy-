@@ -21,7 +21,7 @@ function Panel(document, settings) {
     var overlay = PANEL(attrs);
     this.panel = overlay.build(document.getElementById("mainPopupSet"));
 
-    this.iframe = document.createElement("iframe");
+    this.iframe = document.createXULElement("iframe");
     this.iframe.setAttribute("src", settings.contentURL);
     this.iframe.setAttribute("flex", "1");
     this.panel.appendChild(this.iframe);

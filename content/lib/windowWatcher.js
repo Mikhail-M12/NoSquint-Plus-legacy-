@@ -55,34 +55,6 @@ function watchWindows(callback) {
 		getBrowser().selectedTab = getBrowser().addTab(url,{relatedToCurrent: true});
     }
 	
-	function updateCheck(window){
-		var mostRecentWindow=Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser");
-		if(mostRecentWindow && mostRecentWindow.location.href!="chrome://browser/content/browser.xul") return;
-		Components.utils.import("resource://gre/modules/AddonManager.jsm");  
-		AddonManager.getAddonByID("zoomlevelplus@zoomlevelplus.net").then(function(addon) {  
-			var prefsinstance = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-			var cv = prefsinstance.getCharPref("extensions.zoomlevel.currentversion");
-			var av = addon.version;
-			var w = mostRecentWindow;
-			var url;			
-			var bs = function(v){
-				if(v.split(".").length==2) return v;
-				return v.substring(0,v.lastIndexOf("."));
-				//return ((v.split(".").length==2) ? v : v.substring(0,v.lastIndexOf(".")));
-			}			
-			if (cv != av) {
-				if(cv == "0") {
-					url="http://barisderin.com/?p=3249";
-					w.setTimeout(function(){openURLInTab(w,url);},2000);
-				}
-				else {
-					url="http://barisderin.com/?p=3251";
-					if(!(av.split(".").length==3 && bs(cv)==bs(av))) w.setTimeout(function(){openURLInTab(w,url);},2000);
-				}
-				prefsinstance.setCharPref("extensions.zoomlevel.currentversion",av);				
-			}
-		}); 			
-	}
 	
     // Wrap the callback in a function that ignores failures
     function watcher(window) {
@@ -90,7 +62,7 @@ function watchWindows(callback) {
             // Now that the window has loaded, only handle browser windows
             let {documentElement} = window.document;
             if (documentElement.getAttribute("windowtype") == "navigator:browser"){
-				updateCheck(window);
+				//updateCheck(window);
 				callback(window);
 			}
                 
@@ -101,11 +73,11 @@ function watchWindows(callback) {
 	
     // Wait for the window to finish loading before running the callback
     function runOnLoad(window) {
-		updateCheck(window);
+		//updateCheck(window);
         // Listen for one load event before checking the window type
         window.addEventListener("load", function runOnce() {
             window.removeEventListener("load", runOnce, false);
-			updateCheck(window);
+			//updateCheck(window);
             watcher(window);
         }, false);
     }

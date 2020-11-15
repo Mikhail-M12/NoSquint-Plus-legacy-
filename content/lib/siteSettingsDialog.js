@@ -136,7 +136,7 @@ function init() {
 		NoSquintPlus.currentdragboxpositionyvalue=parseInt(doc.defaultView.getComputedStyle(div, null).getPropertyValue("left").split("px")[0]); 
 	},true);
 
-	var OS = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime).OS;
+	//var OS = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime).OS;
     if(true) {//OS == "Linux"
 		try{
 			var link = this.document.createElement("link");

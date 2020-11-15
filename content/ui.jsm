@@ -32,11 +32,7 @@ Cu.import("chrome://zoomlevel/content/lib/viewManager.js");
 
 Cu.import("chrome://zoomlevel/content/lib/utils.js");
 
-const {
-    PANEL, VBOX, HBOX, DESCRIPTION,
-    HTMLINPUT, LABEL, TEXTBOX, BUTTON,
-    TOOLBARBUTTON
-    } = Xul;
+const {TOOLBARBUTTON} = Xul;
 
 /**
  * Add and remove addon user interface - replacement over overlay.xul, which
@@ -171,17 +167,19 @@ Ui.prototype = {
 		button.setAttribute("class","toolbarbutton-1 chromeclass-toolbar-additional");
         button.addEventListener("command", mainToolbarButton_onCommand);
 		
-		var box = doc.createElement("box");
+		var box = doc.createXULElement("box");
 		box.setAttribute("orient","horizontal");					
 		box.setAttribute("align","center");
 		box.setAttribute("class","toolbarbutton-icon");
-		var image = doc.createElement("image");
-		image.setAttribute("class", Services.vc.compare(Services.appinfo.platformVersion, "56.0") >= 0 ? "hiddenimage" : "");
-		var label = doc.createElement("label");
+		//var image = doc.createElement("image");
+		//image.setAttribute("class", Services.vc.compare(Services.appinfo.platformVersion, "56.0") >= 0 ? "hiddenimage" : "");
+		var label = doc.createXULElement("label");
 		label.setAttribute("id","zoomlevel-indicator");
-		label.setAttribute("class", prefController.branchNS.getBoolPref("zoomIndicatorsEnabled") ? "" : "hiddenlabel");
+		//label.setAttribute("class", prefController.branchNS.getBoolPref("zoomIndicatorsEnabled") ? "" : "hiddenlabel");
 		label.setAttribute("value", "100%/100%");
-		box.appendChild(image);
+		box.setAttribute("id","zoomlevel-indicator-box");
+		box.setAttribute("hidden", prefController.branchNS.getBoolPref("zoomIndicatorsEnabled") ? "false" : "true");
+		//box.appendChild(image);
 		box.appendChild(label);
 		button.appendChild(box);
 

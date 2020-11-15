@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>NoSquint Plus</title>
-    <script src="chrome://zoomlevel/content/external/jquery/jquery-3.1.1.min.js"></script>
+    <script src="chrome://zoomlevel/content/external/jquery/jquery-3.5.1.min.js"></script>
 	<link type="image/png" rel="icon" href="chrome://zoomlevel/skin/icon16.png"/>
     <link rel="stylesheet" type="text/css" media="screen" href="chrome://zoomlevel/content/external/minicolors/jquery.minicolors.css"/>
     <script src="chrome://zoomlevel/content/external/minicolors/jquery.minicolors.min.js"></script>
@@ -267,23 +267,11 @@
 		<input id="zoomIndicatorsEnabled" type="checkbox"/>
         <label for="zoomIndicatorsEnabled">&globalSettings.zoomIndicatorsEnabledLabel;</label>	
 	</div>
-    <div class="row">
-        <div class="col-left">
-            <div style="text-align:center;margin-top:8px;width:540px;">
-				<img src="chrome://zoomlevel/skin/get.png" style="display:none;" />
-				<a href="https://chrome.google.com/webstore/detail/nosquint-plus/jidjekdcooppfeggehblbigabhaihkgj" target="_blank" style="outline:none;">
-					<img id="get_chrome" src="chrome://zoomlevel/skin/ChromeWebStore_BadgeWBorder_v2_206x58.png" style="height:60px;cursor:pointer;"/>
-				</a>
-				<a href="https://addons.opera.com/en-gb/extensions/details/nosquint-plus/" target="_blank" style="outline:none;">
-					<img id="get_opera" src="chrome://zoomlevel/skin/addons_206x58_en@2x.png" style="height:60px;cursor:pointer;"/>
-				</a>
-			</div>
-        </div>
-    </div>	
-    <div class="col-right">
-        <button id="ok">&globalSettings.okButton;</button>
-        <button id="cancel">&globalSettings.cancelButton;</button>
-    </div>
+
+	<div class="col-right">
+		<button id="ok">&globalSettings.okButton;</button>
+		<button id="cancel">&globalSettings.cancelButton;</button>
+	</div>
 </div>
 </body>
 </html>

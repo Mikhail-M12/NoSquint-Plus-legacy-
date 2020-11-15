@@ -73,13 +73,7 @@ XulTag.prototype =
         let doc = parentNode.ownerDocument || parentNode;
 
         // Create the current XUL element and set all defined attributes
-        if (this.tagName.indexOf("html:") === 0) {
-            //Note for validator :: This is safe and borrowed from Firebug to automate UI building.
-            var node = doc.createElementNS(STD_NS, this.tagName);
-        } else {
-			//Note for validator :: This is safe and borrowed from Firebug to automate UI building.
-            var node = doc.createElementNS(XUL_NS, this.tagName);
-        }
+        var node = doc.createElementNS(XUL_NS, this.tagName);
 
         for (let key in this.attrs) {
             node.setAttribute(key, this.attrs[key]);
@@ -118,7 +112,8 @@ function defineTags() {
     for (let i = 0; i < arguments.length; i++) {
         let tagName = arguments[i];
         let fn = createTagHandler(tagName);
-        let fnName = tagName.replace(":", "").toUpperCase(); // CUSTOM: replace ":" for html:input tag
+        //let fnName = tagName.replace(":", "").toUpperCase(); // CUSTOM: replace ":" for html:input tag
+        let fnName = tagName.toUpperCase();
 
         Xul[fnName] = fn;
     }
@@ -131,10 +126,7 @@ function defineTags() {
     }
 }
 
-// Basic XUL tags, append others as needed.
+// Basic XUL tags, append others as needed. //CUSTOM:
 defineTags(
-    "box", "vbox", "hbox", "splitter", "toolbar", "radio", "image",
-    "menupopup", "textbox", "tabbox", "tabs", "tabpanels", "toolbarbutton",
-    "arrowscrollbox", "tabscrollbox", "iframe", "description", "panel",
-    "label", "progressmeter", "resizer", "stack", "spacer"
+"toolbarbutton", "panel"
 );

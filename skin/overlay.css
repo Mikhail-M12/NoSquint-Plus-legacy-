@@ -39,7 +39,3 @@ toolbar[iconsize="small"] #toolbar-zoomlevel-zoomReset {
 #urlbar-zoom-button{
   display:none !important;
 }
-
-#toolbar-zoomlevel-maintoolbarbutton >  box > image.hiddenimage{
-      display:none;
-}

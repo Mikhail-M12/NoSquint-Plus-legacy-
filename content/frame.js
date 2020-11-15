@@ -2,15 +2,15 @@
 //has access to content, so we can change zoom and style only here
 
 function onSetZoom(message) {
-    var mdv = docShell.contentViewer;
+    const bc = this.content.docShell.browsingContext;
     var fullLevel = message.data.fullLevel;
     var textLevel = message.data.textLevel;
-    mdv.fullZoom = fullLevel / 100;
-    mdv.textZoom = textLevel / 100;
+    bc.fullZoom = fullLevel / 100;
+    bc.textZoom = textLevel / 100;
 }
 
 function onSetStyle(message) {	
-	if(content.document instanceof content.document.defaultView.XULDocument) return;
+	if('XULDocument' in content.document.defaultView) return;
     var styleElement = content.document.getElementById("zoomLevel-styles");
     if (!styleElement) {
         styleElement = content.document.createElementNS("http://www.w3.org/1999/xhtml", "style");

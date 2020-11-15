@@ -111,10 +111,12 @@ var viewManager = {
 		while (browserEnumerator.hasMoreElements()) {
 			var browserWin = browserEnumerator.getNext();
 			if(!prefController.branchNS.getBoolPref("zoomIndicatorsEnabled")) {
-				browserWin.document.getElementById("zoomlevel-indicator").classList.add("hiddenlabel");
+				//browserWin.document.getElementById("zoomlevel-indicator").classList.add("hiddenlabel");
+				browserWin.document.getElementById("zoomlevel-indicator-box").setAttribute("hidden", "true");
 			}
 			else {
-				browserWin.document.getElementById("zoomlevel-indicator").classList.remove("hiddenlabel");
+				//browserWin.document.getElementById("zoomlevel-indicator").classList.remove("hiddenlabel");
+				browserWin.document.getElementById("zoomlevel-indicator-box").setAttribute("hidden", "false");
 			}
 		}
     }

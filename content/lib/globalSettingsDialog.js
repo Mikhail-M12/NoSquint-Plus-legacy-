@@ -82,7 +82,7 @@ function onLoad() {
     }
 
     this.tabBrowser.messageManager.sendAsyncMessage("zoomlevel-globalSettings-init", settings);
-	var OS = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime).OS;
+	//var OS = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime).OS;
     //if(OS == "Linux") this.tabBrowser.messageManager.sendAsyncMessage("zoomlevel-globalSettings-linux", {});
     if(true) this.tabBrowser.messageManager.sendAsyncMessage("zoomlevel-globalSettings-linux", {});
 }
