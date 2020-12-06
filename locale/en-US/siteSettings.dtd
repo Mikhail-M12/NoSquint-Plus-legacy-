@@ -15,3 +15,5 @@
 <!ENTITY siteSettings.okButton "Ok">
 <!ENTITY siteSettings.cancelButton "Cancel">
 <!ENTITY siteSettings.newhomelink "No&#160;autoupdates.&#160;Homepage:">
+<!ENTITY siteSettings.okButtonTitle "Save settings (S)">
+<!ENTITY siteSettings.cancelButtonTitle "Restore last saved settings (R)">

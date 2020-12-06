@@ -15,43 +15,140 @@ Cu.import("chrome://zoomlevel/content/lib/globalSettingsDialog.js");
 Cu.import("chrome://zoomlevel/content/lib/utils.js");
 
 function init() {
+    var self = this;
     this.document = this.panel.iframe.contentWindow.document;
-    this.document.getElementById("close").addEventListener("click", cancel_click.bind(this));
-    this.document.getElementById("fullZoomRange").addEventListener("input", fullZoomRange_input.bind(this));
-    this.document.getElementById("fullZoom").addEventListener("input", fullZoom_input.bind(this));
-    this.document.getElementById("fullZoomUseDefault").addEventListener("click", fullZoomUseDefault_click.bind(this));
-    this.document.getElementById("textZoomRange").addEventListener("input", textZoomRange_input.bind(this));
-    this.document.getElementById("textZoom").addEventListener("input", textZoom_input.bind(this));
-    this.document.getElementById("textZoomUseDefault").addEventListener("click", textZoomUseDefault_click.bind(this));
-    this.document.getElementById("textColorEnabled").addEventListener("click", textColorEnabled_click.bind(this));
-    this.document.getElementById("textColor").addEventListener("input", textColor_input.bind(this));
-
-    this.document.getElementById("backgroundColorEnabled").addEventListener("click", backgroundColorEnabled_click.bind(this));
-    this.document.getElementById("backgroundColor").addEventListener("input", backgroundColor_input.bind(this));
-    this.document.getElementById("imageBackgroundEnabled").addEventListener("click", imageBackgroundEnabled_click.bind(this));
-    this.document.getElementById("linksUnvisitedEnabled").addEventListener("click", linksUnvisitedEnabled_click.bind(this));
-    this.document.getElementById("linksUnvisited").addEventListener("input", linksUnvisited_input.bind(this));
-    this.document.getElementById("linksVisitedEnabled").addEventListener("click", linksVisitedEnabled_click.bind(this));
-    this.document.getElementById("linksVisited").addEventListener("input", linksVisited_input.bind(this));
-    this.document.getElementById("linksUnderlineEnabled").addEventListener("click", linksUnderlineEnabled_click.bind(this));
-    this.document.getElementById("ok").addEventListener("click", ok_click.bind(this));
-    this.document.getElementById("cancel").addEventListener("click", cancel_click.bind(this));
-    this.document.getElementById("globalSettings").addEventListener("click", globalSettings_click.bind(this));
-	
-    //this.document.getElementById("get_chrome").addEventListener("click", get_chrome.bind(this));	
-    //this.document.getElementById("get_opera").addEventListener("click", get_opera.bind(this));
-	
+    this.document.getElementById("close").addEventListener("click", close_click.bind(this));
     this.site = prefController.getSiteFromURI(getgBrowser().currentURI);
-    this.isPrivate = isTabPrivate(getgBrowser().selectedBrowser);
+    this.isPrivate = isTabPrivate(this.mytab_lb);
+    this.document.getElementById("cancel").addEventListener("click", cancel_click.bind(this));
+
+    this.labelFullzoom=this.document.querySelector("label[for=fullZoom]");
+    this.labelTextzoom=this.document.querySelector("label[for=textZoom]");
+    this.stytle1=this.document.querySelector("legend#stytle1");
+    this.stytle2=this.document.querySelector("legend#stytle2");
+    this.zoomfFirstChange_runOnce0 = function (){
+	zoomfFirstChange.bind(self)();
+	self.fullZoomRangeEl.removeEventListener("input", self.zoomfFirstChange_runOnce0);
+	self.fullZoomEl.removeEventListener("input", self.zoomfFirstChange_runOnce0);
+	self.fullZoomUseDefaultEl.removeEventListener("click", self.zoomfFirstChange_runOnce0);
+    };
+    this.zoomtFirstChange_runOnce0 = function (){
+	zoomtFirstChange.bind(self)();
+	self.textZoomRangeEl.removeEventListener("input", self.zoomtFirstChange_runOnce0);
+	self.textZoomEl.removeEventListener("input", self.zoomtFirstChange_runOnce0);
+	self.textZoomUseDefaultEl.removeEventListener("click", self.zoomtFirstChange_runOnce0);
+    };
+    this.styles1FirstChange_runOnce0 = function (){
+	styles1FirstChange.bind(self)();
+	self.textColorEnabledEl.removeEventListener("click", self.styles1FirstChange_runOnce0);
+	self.textColorEl.removeEventListener("input", self.styles1FirstChange_runOnce0);
+	self.backgroundColorEnabledEl.removeEventListener("click", self.styles1FirstChange_runOnce0);
+	self.backgroundColorEl.removeEventListener("input", self.styles1FirstChange_runOnce0);
+	self.imageBackgroundEnabledEl.removeEventListener("click", self.styles1FirstChange_runOnce0);
+    };
+    this.styles2FirstChange_runOnce0 = function (){
+	styles2FirstChange.bind(self)();
+	self.linksUnvisitedEnabledEl.removeEventListener("click", self.styles2FirstChange_runOnce0);
+	self.linksUnvisitedEl.removeEventListener("input", self.styles2FirstChange_runOnce0);
+	self.linksVisitedEnabledEl.removeEventListener("click", self.styles2FirstChange_runOnce0);
+	self.linksVisitedEl.removeEventListener("input", self.styles2FirstChange_runOnce0);
+	self.linksUnderlineEnabledEl.removeEventListener("click", self.styles2FirstChange_runOnce0);
+    };
+
+    this.fullZoomRangeEl=this.document.getElementById("fullZoomRange");
+    this.fullZoomRangeEl.addEventListener("input", fullZoomRange_input.bind(this));
+    this.fullZoomRangeEl.addEventListener("input", this.zoomfFirstChange_runOnce0);
+
+    this.fullZoomEl=this.document.getElementById("fullZoom");
+    this.fullZoomEl.addEventListener("input", fullZoom_input.bind(this));
+    this.fullZoomEl.addEventListener("input", this.zoomfFirstChange_runOnce0);
+
+    this.fullZoomUseDefaultEl=this.document.getElementById("fullZoomUseDefault");
+    this.fullZoomUseDefaultEl.addEventListener("click", fullZoomUseDefault_click.bind(this));
+    this.fullZoomUseDefaultEl.addEventListener("click", this.zoomfFirstChange_runOnce0);
+
+    this.textZoomRangeEl=this.document.getElementById("textZoomRange");
+    this.textZoomRangeEl.addEventListener("input", textZoomRange_input.bind(this));
+    this.textZoomRangeEl.addEventListener("input", this.zoomtFirstChange_runOnce0);
+
+    this.textZoomEl=this.document.getElementById("textZoom");
+    this.textZoomEl.addEventListener("input", textZoom_input.bind(this));
+    this.textZoomEl.addEventListener("input", this.zoomtFirstChange_runOnce0);
+
+    this.textZoomUseDefaultEl=this.document.getElementById("textZoomUseDefault");
+    this.textZoomUseDefaultEl.addEventListener("click", textZoomUseDefault_click.bind(this));
+    this.textZoomUseDefaultEl.addEventListener("click", this.zoomtFirstChange_runOnce0);
+
+
+    this.textColorEnabledEl=this.document.getElementById("textColorEnabled");
+    this.textColorEnabledEl.addEventListener("click", textColorEnabled_click.bind(this));
+    this.textColorEnabledEl.addEventListener("click", this.styles1FirstChange_runOnce0);
+
+    this.textColorEl=this.document.getElementById("textColor");
+    this.textColorEl.addEventListener("input", textColor_input.bind(this));
+    this.textColorEl.addEventListener("input", this.styles1FirstChange_runOnce0);
+
+    this.backgroundColorEnabledEl=this.document.getElementById("backgroundColorEnabled");
+    this.backgroundColorEnabledEl.addEventListener("click", backgroundColorEnabled_click.bind(this));
+    this.backgroundColorEnabledEl.addEventListener("click", this.styles1FirstChange_runOnce0);
+
+    this.backgroundColorEl=this.document.getElementById("backgroundColor");
+    this.backgroundColorEl.addEventListener("input", backgroundColor_input.bind(this));
+    this.backgroundColorEl.addEventListener("input", this.styles1FirstChange_runOnce0);
+
+    this.imageBackgroundEnabledEl=this.document.getElementById("imageBackgroundEnabled");
+    this.imageBackgroundEnabledEl.addEventListener("click", imageBackgroundEnabled_click.bind(this));
+    this.imageBackgroundEnabledEl.addEventListener("click", this.styles1FirstChange_runOnce0);
+
+
+    this.linksUnvisitedEnabledEl=this.document.getElementById("linksUnvisitedEnabled");
+    this.linksUnvisitedEnabledEl.addEventListener("click", linksUnvisitedEnabled_click.bind(this));
+    this.linksUnvisitedEnabledEl.addEventListener("click", this.styles2FirstChange_runOnce0);
+
+    this.linksUnvisitedEl=this.document.getElementById("linksUnvisited");
+    this.linksUnvisitedEl.addEventListener("input", linksUnvisited_input.bind(this));
+    this.linksUnvisitedEl.addEventListener("input", this.styles2FirstChange_runOnce0);
+
+    this.linksVisitedEnabledEl=this.document.getElementById("linksVisitedEnabled");
+    this.linksVisitedEnabledEl.addEventListener("click", linksVisitedEnabled_click.bind(this));
+    this.linksVisitedEnabledEl.addEventListener("click", this.styles2FirstChange_runOnce0);
+
+    this.linksVisitedEl=this.document.getElementById("linksVisited");
+    this.linksVisitedEl.addEventListener("input", linksVisited_input.bind(this));
+    this.linksVisitedEl.addEventListener("input", this.styles2FirstChange_runOnce0);
+
+    this.linksUnderlineEnabledEl=this.document.getElementById("linksUnderlineEnabled");
+    this.linksUnderlineEnabledEl.addEventListener("click", linksUnderlineEnabled_click.bind(this));
+    this.linksUnderlineEnabledEl.addEventListener("click", this.styles2FirstChange_runOnce0);
+
+
+    this.document.getElementById("ok").addEventListener("click", ok_click.bind(this));
+    this.document.getElementById("globalSettings").addEventListener("click", globalSettings_click.bind(this));
+
+    if ((this.mytab_lb.hasunsavedzoomf == true) || (this.mytab_lb.hasunsavedzoomt == true) || (this.mytab_lb.hasunsavedstyle1 == true) || (this.mytab_lb.hasunsavedstyle2 == true)){
+	var stringBundle = Services.strings.createBundle('chrome://zoomlevel/locale/overlay.properties?' + Math.random());
+	this.document.getElementById("cancel").textContent = stringBundle.GetStringFromName("buttonCancelR.textContent");
+	if (this.mytab_lb.hasunsavedzoomf == true)
+		this.labelFullzoom.setAttribute("style","color:brown;");
+	if (this.mytab_lb.hasunsavedzoomt == true)
+		this.labelTextzoom.setAttribute("style","color:brown;");
+	if (this.mytab_lb.hasunsavedstyle1 == true)
+		this.stytle1.setAttribute("style","color:brown;");
+	if (this.mytab_lb.hasunsavedstyle2 == true)
+		this.stytle2.setAttribute("style","color:brown;");
+    }
+
+    this.panel.iframe.addEventListener('keydown',panelkeyhandler.bind(this),true);
+
     this.document.getElementById("siteURL").textContent = this.site;
 
     var [textLevel, fullLevel] = prefController.getZoomForSiteWithDefaults(this.site, this.isPrivate);
     var styles = prefController.getStyleForSite(this.site, this.isPrivate);
 
-    this.document.getElementById("fullZoom").value = fullLevel;
-    this.document.getElementById("fullZoomRange").value = fullLevel;
-    this.document.getElementById("textZoom").value = textLevel;
-    this.document.getElementById("textZoomRange").value = textLevel;
+    this.fullZoomEl.value = fullLevel;
+    this.fullZoomRangeEl.value = fullLevel;
+    this.textZoomEl.value = textLevel;
+    this.textZoomRangeEl.value = textLevel;
 
     for (let [id, defcolor] of items(prefController.defaultColors)) {
         var hasValue = styles && (styles[id] !== "0");
@@ -137,7 +234,7 @@ function init() {
 	},true);
 
 	//var OS = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime).OS;
-    if(true) {//OS == "Linux"
+    //if(true) {//OS == "Linux"
 		try{
 			var link = this.document.createElement("link");
 			link.setAttribute("rel","stylesheet");
@@ -152,51 +249,75 @@ function init() {
 		}catch(e){
 			//
 		}	
-	}	
+	//}
+	//this.panel.iframe.focus();
 	
+Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").addEventListener('keyup',this.winkeyhandler);
+}
+
+function zoomfFirstChange (){
+	this.labelFullzoom.setAttribute("style","color:green;");
+	this.labelTextzoom.setAttribute("style","color:green;");
+	this.mytab_lb.hasunsavedzoomf = true;
+}
+function zoomtFirstChange (){
+	this.labelFullzoom.setAttribute("style","color:green;");
+	this.labelTextzoom.setAttribute("style","color:green;");
+	this.mytab_lb.hasunsavedzoomt = true;
+}
+
+function styles1FirstChange (){
+	this.stytle1.setAttribute("style","color:green;");
+	this.stytle2.setAttribute("style","color:green;");
+	this.mytab_lb.hasunsavedstyle1 = true;
+}
+function styles2FirstChange (){
+	this.stytle1.setAttribute("style","color:green;");
+	this.stytle2.setAttribute("style","color:green;");
+	this.mytab_lb.hasunsavedstyle2 = true;
 }
 
 function fullZoomRange_input() {
-    var fullZoomValue = this.document.getElementById("fullZoomRange").value;
-    this.document.getElementById("fullZoom").value = fullZoomValue;
+    var fullZoomValue = this.fullZoomRangeEl.value;
+    this.fullZoomEl.value = fullZoomValue;
     this.previewZoom();
 }
 
 function fullZoom_input() {
-    var fullZoomValue = this.document.getElementById("fullZoom").value;
-    this.document.getElementById("fullZoomRange").value = fullZoomValue;
+    var fullZoomValue = this.fullZoomEl.value;
+    this.fullZoomRangeEl.value = fullZoomValue;
     this.previewZoom();
 }
 
 function fullZoomUseDefault_click() {
     var [textLevel, fullLevel] = prefController.getZoomDefaults(this.site);
-    this.document.getElementById("fullZoom").value = fullLevel;
-    this.document.getElementById("fullZoomRange").value = fullLevel;
+    this.fullZoomEl.value = fullLevel;
+    this.fullZoomRangeEl.value = fullLevel;
     this.previewZoom();
 }
 
 function textZoomRange_input() {
-    var textZoomValue = this.document.getElementById("textZoomRange").value;
-    this.document.getElementById("textZoom").value = textZoomValue;
+    var textZoomValue = this.textZoomRangeEl.value;
+    this.textZoomEl.value = textZoomValue;
     this.previewZoom();
 }
 
 function textZoom_input() {
-    var textZoomValue = this.document.getElementById("textZoom").value;
-    this.document.getElementById("textZoomRange").value = textZoomValue;
+    var textZoomValue = this.textZoomEl.value;
+    this.textZoomRangeEl.value = textZoomValue;
     this.previewZoom();
 }
 
 function textZoomUseDefault_click() {
     var [textLevel, fullLevel] = prefController.getZoomDefaults(this.site);
-    this.document.getElementById("textZoom").value = textLevel;
-    this.document.getElementById("textZoomRange").value = textLevel;
+    this.textZoomEl.value = textLevel;
+    this.textZoomRangeEl.value = textLevel;
     this.previewZoom();
 }
 
 function textColorEnabled_click() {
-    var isEnabled = this.document.getElementById("textColorEnabled").checked;
-    this.document.getElementById("textColor").disabled = !isEnabled;
+    var isEnabled = this.textColorEnabledEl.checked;
+    this.textColorEl.disabled = !isEnabled;
     this.previewStyle();
 }
 
@@ -205,8 +326,8 @@ function textColor_input() {
 }
 
 function backgroundColorEnabled_click() {
-    var isEnabled = this.document.getElementById("backgroundColorEnabled").checked;
-    this.document.getElementById("backgroundColor").disabled = !isEnabled;
+    var isEnabled = this.backgroundColorEnabledEl.checked;
+    this.backgroundColorEl.disabled = !isEnabled;
     this.previewStyle();
 }
 
@@ -219,8 +340,8 @@ function imageBackgroundEnabled_click() {
 }
 
 function linksUnvisitedEnabled_click() {
-    var isEnabled = this.document.getElementById("linksUnvisitedEnabled").checked;
-    this.document.getElementById("linksUnvisited").disabled = !isEnabled;
+    var isEnabled = this.linksUnvisitedEnabledEl.checked;
+    this.linksUnvisitedEl.disabled = !isEnabled;
     this.previewStyle();
 }
 
@@ -229,8 +350,8 @@ function linksUnvisited_input() {
 }
 
 function linksVisitedEnabled_click() {
-    var isEnabled = this.document.getElementById("linksVisitedEnabled").checked;
-    this.document.getElementById("linksVisited").disabled = !isEnabled;
+    var isEnabled = this.linksVisitedEnabledEl.checked;
+    this.linksVisitedEl.disabled = !isEnabled;
     this.previewStyle();
 }
 
@@ -240,6 +361,13 @@ function linksVisited_input() {
 
 function linksUnderlineEnabled_click() {
     this.previewStyle();
+}
+
+function panelkeyhandler(event) {
+    if (event.isComposing || event.keyCode === 229) return;
+    if (event.code == 'Escape') {
+	if (event.target.className == 'minicolor minicolors-input') this.colorpanelcanbeopened = true;
+    } else if (event.code == 'KeyS') event.preventDefault();
 }
 
 function ok_click() {
@@ -252,6 +380,11 @@ function cancel_click() {
     this.close();
 }
 
+function close_click() {
+    viewManager.updateIndicator(this.mytab_lb);
+    this.close();
+}
+
 function globalSettings_click() {
     var globalSettingsDialog = new GlobalSettingsDialog();
     globalSettingsDialog.open();
@@ -259,23 +392,26 @@ function globalSettings_click() {
 }
 
 function SiteSettingsDialog() {
+	var self = this;
+	this.mytab_lb = getgBrowser().selectedBrowser;
     this.panel = new Panel(null, {
         contentURL: "chrome://zoomlevel/content/lib/siteSettings.xhtml"
     });
 
+	//bindedwinkeyhandler = winkeyhandler.bind(this);
+	this.winkeyhandler = function(event) {
+		if (event.isComposing || event.keyCode === 229) return;
+		if (event.code == 'Escape'){
+			if (self.colorpanelcanbeopened == true) self.colorpanelcanbeopened = false;
+			else close_click.bind(self)();
+		} else if (event.code == 'KeyS'){
+			ok_click.bind(self)();
+		} else if (event.code == 'KeyR'){
+			cancel_click.bind(self)();
+		}
+	}
+
     this.panel.iframe.addEventListener("DOMContentLoaded", init.bind(this));
-}
-
-function get_chrome() {
-    var gBrowser = Services.wm.getMostRecentWindow("navigator:browser").gBrowser;
-	gBrowser.selectedTab = gBrowser.addTab("https://chrome.google.com/webstore/detail/nosquint-plus/jidjekdcooppfeggehblbigabhaihkgj",{relatedToCurrent: true});
-	this.close();
-}
-
-function get_opera() {
-    var gBrowser = Services.wm.getMostRecentWindow("navigator:browser").gBrowser;
-	gBrowser.selectedTab = gBrowser.addTab("https://addons.opera.com/en-gb/extensions/details/nosquint-plus/",{relatedToCurrent: true});
-	this.close();
 }
 
 SiteSettingsDialog.prototype = {
@@ -284,6 +420,9 @@ SiteSettingsDialog.prototype = {
     },
 
     close: function () {
+        //this.panel.iframe.removeEventListener('keydown',???);
+	
+Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").removeEventListener('keyup',this.winkeyhandler);
         this.panel.close();
         this.panel.destroy();
     },
@@ -292,12 +431,15 @@ SiteSettingsDialog.prototype = {
         var zoom = prefController.getZoomForSiteWithDefaults(this.site, this.isPrivate);
         var style = prefController.getStyleForSiteWithDefaults(this.site, this.isPrivate);
         viewManager.setCurrentTabZoom(zoom);
-        viewManager.setCurrentTabStyle(style);
+        viewManager.setTabStyle(this.mytab_lb, style);
+        //this.mytab_lb.hasunsavedzoom = false;
+        //this.mytab_lb.hasunsavedstyle1 = false;
+        //this.mytab_lb.hasunsavedstyle2 = false;
     },
 
     previewZoom: function () {
         var zoom = this.getZoom();
-        viewManager.setCurrentTabZoom(zoom);
+        viewManager.setCurrentTabZoomTemp(zoom);
     },
 
     previewStyle: function () {
@@ -305,12 +447,13 @@ SiteSettingsDialog.prototype = {
         if (prefController.excludedSites.indexOf(this.site) === -1) {
             style = prefController.applyStyleGlobals(style);
         }
-        viewManager.setCurrentTabStyle(style);
+        viewManager.setTabStyleTemp(this.mytab_lb, style);
+        //this.mytab_lb.hasunsavedstyle = true;
     },
 
     getZoom: function () {
-        var textLevel = +this.document.getElementById("textZoom").value;
-        var fullLevel = +this.document.getElementById("fullZoom").value;
+        var textLevel = +this.textZoomEl.value;
+        var fullLevel = +this.fullZoomEl.value;
         return [textLevel, fullLevel];
     },
 
@@ -346,5 +489,8 @@ SiteSettingsDialog.prototype = {
         }
 
         prefController.updateSiteList(this.site, zoom, styles, this.isPrivate);
+        //this.mytab_lb.hasunsavedzoom = false;
+        //this.mytab_lb.hasunsavedstyle1 = false;
+        //this.mytab_lb.hasunsavedstyle2 = false;
     }
 };

@@ -15,3 +15,5 @@
 <!ENTITY siteSettings.okButton "ОК">
 <!ENTITY siteSettings.cancelButton "Отмена">
 <!ENTITY siteSettings.newhomelink "Автообновлений нет. Домашняя страница:">
+<!ENTITY siteSettings.okButtonTitle "Сохранить настройки (S)">
+<!ENTITY siteSettings.cancelButtonTitle "Восстановить последние сохранённые настройки (R)">

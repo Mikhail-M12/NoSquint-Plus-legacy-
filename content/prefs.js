@@ -4,7 +4,7 @@ pref("extensions.zoomlevel.zoomIncrement", 10);
 pref("extensions.zoomlevel.rememberSites", true);
 pref("extensions.zoomlevel.sites", "");
 pref("extensions.zoomlevel.sitesSaveDelay", 5000);
-pref("extensions.zoomlevel.exceptions", "*/~* *.sourceforge.net *.google.[*]");
+pref("extensions.zoomlevel.exceptions", "*.sourceforge.net [**].livejournal.com *.google.[*] */~*");
 pref("extensions.zoomlevel.zoomImages", false);
 pref("extensions.zoomlevel.wheelZoomEnabled", true);
 pref("extensions.zoomlevel.wheelZoomInvert", false);

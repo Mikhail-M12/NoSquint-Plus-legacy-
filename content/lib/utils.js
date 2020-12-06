@@ -38,9 +38,9 @@ function getWindowForTab(tab){
     }
 }
 
-function isTabPrivate(tab) {
+function isTabPrivate(tab_lb) {
     try {
-        var tabWindow = getWindowForTab(tab);
+        var tabWindow = getWindowForTab(tab_lb);
         return PrivateBrowsingUtils.isWindowPrivate(tabWindow);
     } catch (e) {
         // As per issue #73, for some unknown reason,

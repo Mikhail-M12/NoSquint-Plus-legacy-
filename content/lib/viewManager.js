@@ -15,91 +15,128 @@ Cu.import("chrome://zoomlevel/content/lib/utils.js");
 
 var viewManager = {
     setCurrentTabZoom: function (zoom) {
-        var selTab = getgBrowser().selectedBrowser;
-        this.setTabZoom(selTab, zoom);
-    },
-
-    setCurrentTabStyle: function (style) {
-        var selTab = getgBrowser().selectedBrowser;
-        this.setTabStyle(selTab, style);
-    },
-
-    setTabZoom: function (tab, zoom) {
+        var selTab_lb = getgBrowser().selectedBrowser;
         var data = {
             textLevel: zoom[0],
             fullLevel: zoom[1]
         };
-        tab.messageManager.sendAsyncMessage("zoomlevel-setZoom", data);
-		viewManager.updateIndicator(tab);
+        selTab_lb.messageManager.sendAsyncMessage("zoomlevel-setZoom", data);
+	selTab_lb.hasunsavedzoomf = false; selTab_lb.hasunsavedzoomt = false;
+	this.updateIndicator(selTab_lb);
     },
 
-    setTabStyle: function (tab, style) {
-        tab.messageManager.sendAsyncMessage("zoomlevel-setStyle", style);
+    setCurrentTabStyle: function (style) {
+        var selTab_lb = getgBrowser().selectedBrowser;
+        this.setTabStyle(selTab_lb, style);
     },
 
-    normalizeTab: function (tab) {
-        this.setTabZoom(tab, [100, 100]);
-        this.setTabStyle(tab, {});
+    setTabZoom: function (tab_lb, zoom) {
+        var data = {
+            textLevel: zoom[0],
+            fullLevel: zoom[1]
+        };
+        tab_lb.messageManager.sendAsyncMessage("zoomlevel-setZoom", data);
+	tab_lb.hasunsavedzoomf = false; tab_lb.hasunsavedzoomt = false;
+	if (tab_lb == getgBrowser().selectedBrowser)
+		this.updateIndicator(tab_lb);
+    },
+
+    setTabStyle: function (tab_lb, style) {
+        tab_lb.messageManager.sendAsyncMessage("zoomlevel-setStyle", style);
+	tab_lb.hasunsavedstyle1 = false; tab_lb.hasunsavedstyle2 = false;
+    },
+
+    setTabStyleTemp: function (tab_lb, style) {
+        tab_lb.messageManager.sendAsyncMessage("zoomlevel-setStyle", style);
+    },
+
+    setCurrentTabZoomTemp: function (zoom) {
+        var selTab_lb = getgBrowser().selectedBrowser;
+        this.setTabZoomTemp(selTab_lb, zoom);
+    },
+
+    resetTabZoomTemp: function (tab_lb) {
+        var site = prefController.getSiteFromURI(tab_lb.currentURI)
+        var [textLevel, fullLevel] = prefController.getZoomDefaults(site);
+        this.setTabZoomTemp(tab_lb, [textLevel, fullLevel]);
+        tab_lb.hasunsavedzoomf = true; tab_lb.hasunsavedzoomt = true;
+    },
+
+    setTabZoomTemp: function (tab_lb, zoom) {
+        var data = {
+            textLevel: zoom[0],
+            fullLevel: zoom[1]
+        };
+        tab_lb.messageManager.sendAsyncMessage("zoomlevel-setZoom", data);
+    },
+
+    normalizeTab: function (tab_lb) {
+        this.setTabZoom(tab_lb, [100, 100]);
+        this.setTabStyle(tab_lb, {});
     },
 
     setSiteZoom: function (site, zoom, isPrivate) {
         var self = this;
-        iterTabs(function (tab) {
-            var tabSite = prefController.getSiteFromURI(tab.currentURI);
-            if (tabSite === site && isTabPrivate(tab) == isPrivate) {
-                self.setTabZoom(tab, zoom);
+        iterTabs(function (tab_lb) {
+            var tabSite = prefController.getSiteFromURI(tab_lb.currentURI);
+            if (tabSite === site && isTabPrivate(tab_lb) == isPrivate) {
+                self.setTabZoom(tab_lb, zoom);
             }
         });
     },
 
     setSiteStyle: function (site, style, isPrivate) {
         var self = this;
-        iterTabs(function (tab) {
-            var tabSite = prefController.getSiteFromURI(tab.currentURI);
-            if (tabSite === site && isTabPrivate(tab) == isPrivate) {
-                self.setTabStyle(tab, style);
+        iterTabs(function (tab_lb) {
+            var tabSite = prefController.getSiteFromURI(tab_lb.currentURI);
+            if (tabSite === site && isTabPrivate(tab_lb) == isPrivate) {
+                self.setTabStyle(tab_lb, style);
             }
         });
     },
 
     updateAll: function () {
         var self = this;
-        iterTabs(function (tab) {
-            if (prefController.isChrome(tab.currentURI)) {
+        iterTabs(function (tab_lb) {
+            if (prefController.isChrome(tab_lb.currentURI)) {
                 //return;
             }
-            var tabSite = prefController.getSiteFromURI(tab.currentURI);
+            var tabSite = prefController.getSiteFromURI(tab_lb.currentURI);
             if (prefController.excludedSites.indexOf(tabSite) !== -1) {
                 return;
             }
-            var zoom = prefController.getZoomForSiteWithDefaults(tabSite, isTabPrivate(tab));
-            self.setTabZoom(tab, zoom);
-            var style = prefController.getStyleForSiteWithDefaults(tabSite, isTabPrivate(tab));
-            self.setTabStyle(tab, style);
+            var zoom = prefController.getZoomForSiteWithDefaults(tabSite, isTabPrivate(tab_lb));
+            self.setTabZoom(tab_lb, zoom);
+            var style = prefController.getStyleForSiteWithDefaults(tabSite, isTabPrivate(tab_lb));
+            self.setTabStyle(tab_lb, style);
         });
     },
 
     normalizeAll: function () {
         var self = this;
-        iterTabs(function (tab) {
-            self.normalizeTab(tab);
+        iterTabs(function (tab_lb) {
+            self.normalizeTab(tab_lb);
         });
     },
 	
-	updateIndicator:function(tab){
-		var document = tab.ownerDocument;
-		
-        var isPrivate = isTabPrivate(tab);
-        var site = prefController.getSiteFromURI(tab.currentURI);
-        var zoom = prefController.getZoomForSiteWithDefaults(site, isPrivate);
-        //var style = prefController.getStyleForSiteWithDefaults(site, isPrivate);
-		
-		if(zoom[0] == zoom[1]){
-			if(document.getElementById("zoomlevel-indicator")) document.getElementById("zoomlevel-indicator").setAttribute("value",zoom[0] + "%");
-		}
-		else{
-			if(document.getElementById("zoomlevel-indicator")) document.getElementById("zoomlevel-indicator").setAttribute("value",zoom[1] + "%" +"/" +  zoom[0] + "%");
-		}
+	updateIndicator:function(tab_lb){
+		//if (tab_lb == getgBrowser().selectedBrowser) {
+			var document = tab_lb.ownerDocument;
+			if(document.getElementById("zoomlevel-indicator")){
+				var isPrivate = isTabPrivate(tab_lb);
+				var site = prefController.getSiteFromURI(tab_lb.currentURI);
+				var zoom = prefController.getZoomForSiteWithDefaults(site, isPrivate);
+				//var style = prefController.getStyleForSiteWithDefaults(site, isPrivate);
+				var symbf = (tab_lb.hasunsavedzoomf == true) ? "?" : "%";
+				var symbt = (tab_lb.hasunsavedzoomt == true) ? "?" : "%";
+				if(zoom[0] == zoom[1]) {
+					var symbs = symbf;
+					if (symbs == "?") symbs += symbt;
+					else if (symbt == "?") symbs += symbt;
+					document.getElementById("zoomlevel-indicator").setAttribute("value",zoom[0] + symbs);
+				} else document.getElementById("zoomlevel-indicator").setAttribute("value",zoom[1] + symbf +"/" +  zoom[0] + symbt);
+			}
+		//}
 	},	
 	
     updateToolbarButton: function () {
@@ -504,24 +541,36 @@ var prefController = {
         return [record[0]].concat(record.slice(3)).toString() == [0, 0, "0", "0", false, "0", "0", false].toString();
     },
 
-    zoomInSite: function (site, isSecondaryZoom, isPrivate) {
+    zoomInSite: function (site, isSecondaryZoom, isPrivate, incMultiplier = 1) {
         var zoom = this.getZoomForSiteWithDefaults(site, isPrivate);
+        var zoomstep = this.zoomIncrement * incMultiplier;
         if (this.fullZoomPrimary === !!isSecondaryZoom) {
-            zoom[0] = zoom[0] + this.zoomIncrement;
+            zoom[0] = zoom[0] + zoomstep;
         } else {
-            zoom[1] = zoom[1] + this.zoomIncrement;
+            zoom[1] = zoom[1] + zoomstep;
         }
         this.updateSiteList(site, zoom, null, isPrivate);
     },
 
-    zoomOutSite: function (site, isSecondaryZoom, isPrivate) {
+    zoomInSitePositive: function (site, isSecondaryZoom, isPrivate, incMultiplier = 1) {
+	if (this.zoomIncrement > 0) this.zoomInSite(site, isSecondaryZoom, isPrivate, incMultiplier);
+	else this.zoomInSite(site, isSecondaryZoom, isPrivate, -1 * incMultiplier);
+    },
+
+    zoomOutSite: function (site, isSecondaryZoom, isPrivate, incMultiplier = 1) {
         var zoom = this.getZoomForSiteWithDefaults(site, isPrivate);
+        var zoomstep = this.zoomIncrement * incMultiplier;
         if (this.fullZoomPrimary === !!isSecondaryZoom) {
-            zoom[0] = zoom[0] - this.zoomIncrement;
+            zoom[0] = zoom[0] - zoomstep;
         } else {
-            zoom[1] = zoom[1] - this.zoomIncrement;
+            zoom[1] = zoom[1] - zoomstep;
         }
         this.updateSiteList(site, zoom, null, isPrivate);
+    },
+
+    zoomOutSitePositive: function (site, isSecondaryZoom, isPrivate, incMultiplier = 1) {
+	if (this.zoomIncrement > 0) this.zoomOutSite(site, isSecondaryZoom, isPrivate, incMultiplier);
+	else this.zoomOutSite(site, isSecondaryZoom, isPrivate, -1 * incMultiplier);
     },
 
     zoomResetSite: function (site, isPrivate) {

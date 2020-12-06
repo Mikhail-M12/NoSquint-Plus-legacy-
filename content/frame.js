@@ -55,17 +55,3 @@ function getCSSFromStyle(style) {
 
 addMessageListener("zoomlevel-setZoom", onSetZoom);
 addMessageListener("zoomlevel-setStyle", onSetStyle);
-
-addEventListener("DOMContentLoaded",function(e){
-	if(e.originalTarget.location.href!="about:newtab") return;
-	const Cu = Components.utils;
-	Cu.import("chrome://zoomlevel/content/lib/viewManager.js");
-	Cu.import("chrome://zoomlevel/content/lib/windowWatcher.js");
-	Cu.import("chrome://zoomlevel/content/lib/utils.js")
-	var isPrivate = false;
-	var site = prefController.getSiteFromURI(content.document.documentURIObject);
-	var zoom = prefController.getZoomForSiteWithDefaults(site, isPrivate);
-	var style = prefController.getStyleForSiteWithDefaults(site, isPrivate);
-	onSetZoom({data:{textLevel:zoom[0],fullLevel:zoom[1]}})
-	onSetStyle({data:style})	
-},true)

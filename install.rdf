@@ -3,13 +3,13 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>zoomlevelplus@zoomlevelplus.net</em:id>
 		<em:name>NoSquint Plus</em:name>
-		<em:version>56.1.2020.77</em:version>
+		<em:version>56.2020.77</em:version>
 		<em:description>Manage site-specific zoom levels and color settings.</em:description>
 		<em:type>2</em:type>
 		<em:bootstrap>true</em:bootstrap>
 		<em:unpack>false</em:unpack>
 		<em:multiprocessCompatible>true</em:multiprocessCompatible>
-		<em:creator>Baris Derin - 56.1, update - Mish12</em:creator>
+		<em:creator>NoSquint - Jason Tackaberry, NoSquint Plus (56.1) - Baris Derin, update - Mish12</em:creator>
 		<em:updateURL>https://0.0.0.0/updates.rdf</em:updateURL>
 		<em:homepageURL>https://github.com/Mikhail-M12/NoSquint-Plus-legacy-</em:homepageURL>
 

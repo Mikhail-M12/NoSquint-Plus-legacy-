@@ -53,7 +53,7 @@ function Ui() {
     this.cssUri = ios.newURI("chrome://zoomlevel/skin/overlay.css", null, null);
 
     /** Import localization properties **/
-    this.stringBundle = Services.strings.createBundle('chrome://zoomlevel/locale/overlay.properties?' + Math.random()); // Randomize URI to work around bug 719376
+    this.stringBundle = Services.strings.createBundle('chrome://zoomlevel/locale/overlay.properties?' + Math.random()); // Randomize URI to work around bug 719376 (918033)
 }
 
 Ui.prototype = {
@@ -158,7 +158,7 @@ Ui.prototype = {
         let toolbarButtonAttrs = {
             id: this.mainToolbarButtonId,
             label: "NoSquint Plus",
-            tooltiptext: "NoSquint Plus :: Click to open up Site Settings panel"
+            tooltiptext: "NoSquint Plus :: "+this.stringBundle.GetStringFromName("buttonMain.tooltipText")
         };
 
         var overlay = TOOLBARBUTTON(toolbarButtonAttrs);
@@ -166,7 +166,9 @@ Ui.prototype = {
         var button = overlay.build(doc);
 		button.setAttribute("class","toolbarbutton-1 chromeclass-toolbar-additional");
         button.addEventListener("command", mainToolbarButton_onCommand);
-		
+        button.addEventListener("auxclick", mainToolbarButton_onaux);
+        button.addEventListener("wheel", mainToolbarButton_onwheel);
+
 		var box = doc.createXULElement("box");
 		box.setAttribute("orient","horizontal");					
 		box.setAttribute("align","center");
@@ -198,6 +200,7 @@ Ui.prototype = {
         var button = overlay.build(doc);
 		button.setAttribute("class","toolbarbutton-1");
         button.addEventListener("command", zoomInButton_onCommand);
+        button.addEventListener("auxclick", zoomInButton_onaux);
 
         return button;
     },
@@ -214,6 +217,7 @@ Ui.prototype = {
         var button = overlay.build(doc);
 		button.setAttribute("class","toolbarbutton-1");
         button.addEventListener("command", zoomOutButton_onCommand);
+        button.addEventListener("auxclick", zoomOutButton_onaux);
 
         return button;
     },
@@ -293,18 +297,59 @@ function mainToolbarButton_onCommand(event) {
     siteSettingsDialog.open();
 }
 
+function mainToolbarButton_onaux(event) {
+    if (event.button == 1) {//middle click
+	var selBrowser = getgBrowser().selectedBrowser;
+	if (event.shiftKey == true){
+		var isPrivate = isTabPrivate(selBrowser);
+		var site = prefController.getSiteFromURI(selBrowser.currentURI);
+		prefController.zoomResetSite(site, isPrivate);
+	} else {
+		viewManager.resetTabZoomTemp(selBrowser);
+		viewManager.updateIndicator(selBrowser);
+	}
+    }
+}
+
+function mainToolbarButton_onwheel(event) {
+	var selBrowser = getgBrowser().selectedBrowser;
+	var isPrivate = isTabPrivate(selBrowser);
+	var site = prefController.getSiteFromURI(selBrowser.currentURI);
+	var multipl = 1 * (event.buttons + 1);
+	if (event.deltaY < 0) prefController.zoomInSite(site, event.shiftKey, isPrivate, multipl);	
+	else prefController.zoomOutSite(site, event.shiftKey, isPrivate, multipl);	
+}
+
 function zoomInButton_onCommand(event) {
     var selBrowser = getgBrowser().selectedBrowser;
     var isPrivate = isTabPrivate(selBrowser);
     var site = prefController.getSiteFromURI(selBrowser.currentURI);
-    prefController.zoomInSite(site, event.shiftKey, isPrivate);	
+    prefController.zoomInSitePositive(site, event.shiftKey, isPrivate);	
+}
+
+function zoomInButton_onaux(event) {
+    if (event.button == 1) {//middle click
+	var selBrowser = getgBrowser().selectedBrowser;
+	var isPrivate = isTabPrivate(selBrowser);
+	var site = prefController.getSiteFromURI(selBrowser.currentURI);
+	prefController.zoomInSitePositive(site, event.shiftKey, isPrivate, 2);
+    }
 }
 
 function zoomOutButton_onCommand(event) {
     var selBrowser = getgBrowser().selectedBrowser;
     var isPrivate = isTabPrivate(selBrowser);
     var site = prefController.getSiteFromURI(selBrowser.currentURI);
-    prefController.zoomOutSite(site, event.shiftKey, isPrivate);
+    prefController.zoomOutSitePositive(site, event.shiftKey, isPrivate);
+}
+
+function zoomOutButton_onaux(event) {
+    if (event.button == 1) {//middle click
+	var selBrowser = getgBrowser().selectedBrowser;
+	var isPrivate = isTabPrivate(selBrowser);
+	var site = prefController.getSiteFromURI(selBrowser.currentURI);
+	prefController.zoomOutSitePositive(site, event.shiftKey, isPrivate, 2);
+    }
 }
 
 function zoomResetButton_onCommand() {

@@ -39,9 +39,9 @@ function loadAddon() {
     //register frame script
     Services.mm.loadFrameScript("chrome://zoomlevel/content/frame.js", true);
     initSiteSpecific();
+    ui.attach();
     tabWatcher.init();
     mouseScroller.init();
-    ui.attach();
 }
 
 var originalSiteSpecific = true;
