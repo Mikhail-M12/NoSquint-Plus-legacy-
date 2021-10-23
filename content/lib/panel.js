@@ -16,7 +16,7 @@ function Panel(document, settings) {
     var screen = document.defaultView.screen;
     var attrs = {
         noautohide: true,
-        style: "padding: 0; margin: 0; width: " + screen.width + "px; height: " + screen.height + "px; background-color: transparent; border: none; -moz-appearance: none !important;"
+        style: "padding: 0; margin: 0; width: " + screen.width + "px; height: " + screen.height + "px; --panel-background: #00000000; background-color: #00000000; border: none; -moz-appearance: none !important;"
     };
     var overlay = PANEL(attrs);
     this.panel = overlay.build(document.getElementById("mainPopupSet"));
