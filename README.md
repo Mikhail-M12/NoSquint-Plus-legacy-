@@ -4,7 +4,7 @@
  Работающие версии аддона NoSquint Plus (основаны на NoSquint Plus 56.1.):
 - 56.1(L) – для Firefox 39-56 \[\*1\], Waterfox, Waterfox Classic и Basilisk.
 - 56.1.2019.0.1 – для Firefox 58-68 \[\*1\] и Waterfox Current 2019-2020.
-- 56.2021.91 – для Firefox 77+ \[\*1\] и Waterfox G3/G4.</br></br>
+- 56.2021.91 – для Firefox 77+ \[\*1\] и Waterfox G3/G4/G5.</br></br>
 
  NoSquint имеет преимущество над другими аддонами для масштабирования: NoSquint позволяет устанавливать независимые полный и текстовый масштабы одновременно и запоминает эти установки для сайтов. Другой аддон, который может дополнять NoSquint, потому что масштабирует по-другому: https://addons.mozilla.org/en-US/firefox/addon/custom-page-zoom/
 
@@ -32,7 +32,7 @@
  Working versions of NoSquint Plus addon (based on NoSquint Plus 56.1):
 - 56.1(L) – for Firefox 39-56 \[\*1\], Waterfox, Waterfox Classic and Basilisk.
 - 56.1.2019.0.1 – for Firefox 58-68 \[\*1\] and Waterfox Current 2019-2020.
-- 56.2021.91 – for Firefox 77+ \[\*1\] and Waterfox G3/G4.</br></br>
+- 56.2021.91 – for Firefox 77+ \[\*1\] and Waterfox G3/G4/G5.</br></br>
 
  NoSquint has "killer feature" as compared with other zoom addons: NoSquint allows to set independent full and text zoom levels simultaneously and remembers these settings for sites. Another addon that can complement with NoSquint: https://addons.mozilla.org/en-US/firefox/addon/custom-page-zoom/ . It uses different zoom method.
 
