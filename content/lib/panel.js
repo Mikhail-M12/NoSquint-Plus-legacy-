@@ -24,6 +24,7 @@ function Panel(document, settings) {
     this.iframe = document.createXULElement("iframe");
     this.iframe.setAttribute("src", settings.contentURL);
     this.iframe.setAttribute("flex", "1");
+    this.iframe.style.height = screen.height + "px";
     this.panel.appendChild(this.iframe);
 }
 
@@ -32,7 +33,7 @@ Panel.prototype = {
 		document = document || Services.wm.getMostRecentWindow("navigator:browser").document;
         //var screen = Services.appShell.hiddenDOMWindow.screen;
 		var screen = document.defaultView.screen;
-        this.panel.openPopup(null, "overlap", screen.availLeft, screen.availTop);
+        this.panel.openPopup(null, "overlap", screen.availLeft, screen.availTop, true, true);
     },
     close: function () {
         this.panel.hidePopup();

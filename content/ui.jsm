@@ -173,15 +173,13 @@ Ui.prototype = {
 		box.setAttribute("orient","horizontal");					
 		box.setAttribute("align","center");
 		box.setAttribute("class","toolbarbutton-icon");
-		//var image = doc.createElement("image");
-		//image.setAttribute("class", Services.vc.compare(Services.appinfo.platformVersion, "56.0") >= 0 ? "hiddenimage" : "");
 		var label = doc.createXULElement("label");
 		label.setAttribute("id","zoomlevel-indicator");
 		//label.setAttribute("class", prefController.branchNS.getBoolPref("zoomIndicatorsEnabled") ? "" : "hiddenlabel");
 		label.setAttribute("value", "100%/100%");
 		box.setAttribute("id","zoomlevel-indicator-box");
 		box.setAttribute("hidden", prefController.branchNS.getBoolPref("zoomIndicatorsEnabled") ? "false" : "true");
-		//box.appendChild(image);
+		box.style.width = "max-content";
 		box.appendChild(label);
 		button.appendChild(box);
 
