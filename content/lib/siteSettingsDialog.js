@@ -4,7 +4,7 @@ var EXPORTED_SYMBOLS = ["SiteSettingsDialog"];
 
 const Cu = Components.utils;
 
-Cu.import("resource://gre/modules/Services.jsm");
+const Services = globalThis.Services || Cu.import("resource://gre/modules/Services.jsm").Services;
 
 Cu.import("chrome://zoomlevel/content/lib/panel.js");
 

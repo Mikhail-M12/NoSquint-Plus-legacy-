@@ -2,7 +2,7 @@ var EXPORTED_SYMBOLS = ["Panel"];
 
 const Cu = Components.utils;
 
-Cu.import("resource://gre/modules/Services.jsm");
+const Services = globalThis.Services || Cu.import("resource://gre/modules/Services.jsm").Services;
 
 /** Xul.js used to define set of functions similar to tags of overlay.xul **/
 Cu.import("chrome://zoomlevel/content/lib/xul.js");

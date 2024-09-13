@@ -3,7 +3,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>zoomlevelplus@zoomlevelplus.net</em:id>
 		<em:name>NoSquint Plus</em:name>
-		<em:version>56.2023.115</em:version>
+		<em:version>56.2024.128</em:version>
 		<em:description>Manage site-specific zoom levels and color settings.</em:description>
 		<em:type>2</em:type>
 		<em:bootstrap>true</em:bootstrap>
@@ -13,7 +13,7 @@
 		<em:updateURL>https://0.0.0.0/updates.rdf</em:updateURL>
 		<em:homepageURL>https://github.com/Mikhail-M12/NoSquint-Plus-legacy-</em:homepageURL>
 
-		<!-- Firefox -->
+		<!-- Firefox/Waterfox/Basilisk/r3dfox -->
 		<em:targetApplication>
 			<Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>

@@ -36,7 +36,7 @@
 
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 
-Cu.import("resource://gre/modules/Services.jsm");
+const Services = globalThis.Services || Cu.import("resource://gre/modules/Services.jsm").Services;
 
 Cu.import("chrome://zoomlevel/content/lib/unload.js");
 

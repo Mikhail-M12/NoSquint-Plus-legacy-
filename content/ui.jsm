@@ -4,7 +4,7 @@ var EXPORTED_SYMBOLS = ["ui"];
 
 const Cu = Components.utils;
 
-Cu.import("resource://gre/modules/Services.jsm");
+const Services = globalThis.Services || Cu.import("resource://gre/modules/Services.jsm").Services;
 
 /** CustomizableUI used to create toolbar button **/
 Cu.import("resource:///modules/CustomizableUI.jsm");

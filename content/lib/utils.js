@@ -11,9 +11,10 @@ catch(error){
 	Cu.import("resource://gre/modules/"+"devtools"+"/Console.jsm");
 }
 
-Cu.import("resource://gre/modules/Services.jsm");
+const Services = globalThis.Services || Cu.import("resource://gre/modules/Services.jsm").Services;
 
-Cu.import("resource://gre/modules/PrivateBrowsingUtils.jsm");
+//Cu.import("resource://gre/modules/PrivateBrowsingUtils.jsm");
+const PrivateBrowsingUtils = ChromeUtils.importESModule("resource://gre/modules/PrivateBrowsingUtils.sys.mjs").PrivateBrowsingUtils;
 
 function getWindowForTab(tab){
     //get window for tab
