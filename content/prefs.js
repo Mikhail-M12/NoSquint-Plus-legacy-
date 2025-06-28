@@ -20,3 +20,5 @@ pref("extensions.zoomlevel.excludedSites", "");
 pref("extensions.zoomlevel.currentversion", "0");
 pref("extensions.zoomlevel.tbplaced", false);
 pref("extensions.zoomlevel.zoomIndicatorsEnabled", false);
+pref("extensions.zoomlevel.need_button_for_wheelzoom", false);
+pref("extensions.zoomlevel.noContextMenu", false);

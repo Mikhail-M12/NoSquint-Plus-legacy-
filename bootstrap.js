@@ -1,24 +1,24 @@
 const Cu = Components.utils;
 
-const Services = globalThis.Services || Cu.import("resource://gre/modules/Services.jsm").Services;
+const Services = globalThis.Services;
 
-//const build = 1509493827; //56.1
+var ui,tabWatcher,mouseScroller;
 
 const extensionLink = "chrome://zoomlevel/",
-    contentLink = extensionLink + "content/",
-    uiModuleLink = contentLink + "ui.jsm",
-    prefModuleLink = contentLink + "lib/preferencesLoader.js",
-    mouseScrollerLink = contentLink + "lib/mouseScroller.js",
-    tabWatcherLink = contentLink + "lib/tabWatcher.js";
+	contentLink = extensionLink + "content/",
+	uiModuleLink = contentLink + "ui.mjs",
+	prefModuleLink = contentLink + "lib/preferencesLoader.mjs",
+	mouseScrollerLink = contentLink + "lib/mouseScroller.mjs",
+	tabWatcherLink = contentLink + "lib/tabWatcher.mjs";
 
 function startup(data, reason) {
-    Cu.import(prefModuleLink);
-    //Note for validator:: This is safe and used to register our add-on preferences.
-    Services.scriptloader.loadSubScript("chrome://zoomlevel/content/prefs.js", {pref: setDefaultPref});
-    Cu.import(uiModuleLink);
-    Cu.import(mouseScrollerLink);
-    Cu.import(tabWatcherLink);
-    loadAddon();
+	const {setDefaultPref} = ChromeUtils.importESModule(prefModuleLink);
+	//Note for validator:: This is safe and used to register our add-on preferences.
+	Services.scriptloader.loadSubScript("chrome://zoomlevel/content/prefs.js", {pref: setDefaultPref});
+	ui = ChromeUtils.importESModule(uiModuleLink).ui;
+	mouseScroller = ChromeUtils.importESModule(mouseScrollerLink).mouseScroller;
+	tabWatcher = ChromeUtils.importESModule(tabWatcherLink).tabWatcher;
+	loadAddon();
 }
 
 function shutdown(data, reason) {
@@ -30,53 +30,53 @@ function shutdown(data, reason) {
 		Cu.unload(prefModuleLink);
 		Cu.unload(mouseScrollerLink);
 		Cu.unload(tabWatcherLink);
-		Services.obs.notifyObservers(null, "chrome-flush-caches", null);		
+		Services.obs.notifyObservers(null, "chrome-flush-caches", null);
 	}
 	catch(e){}
 }
 
 function loadAddon() {
-    //register frame script
-    Services.mm.loadFrameScript("chrome://zoomlevel/content/frame.js", true);
-    initSiteSpecific();
-    ui.attach();
-    tabWatcher.init();
-    mouseScroller.init();
+	//register frame script
+	Services.mm.loadFrameScript("chrome://zoomlevel/content/frame.js", true);
+	initSiteSpecific();
+	ui.attach();
+	tabWatcher.init();
+	mouseScroller.init();
 }
 
 var originalSiteSpecific = true;
 
 //set browser.zoom.siteSpecific to false and save previous value
 function initSiteSpecific(){
-    var svc = Components.classes["@mozilla.org/preferences-service;1"].getService(
-        Components.interfaces.nsIPrefService);
-    svc.QueryInterface(Components.interfaces.nsIPrefBranch);
-    originalSiteSpecific = svc.getBoolPref("browser.zoom.siteSpecific");
-    svc.setBoolPref("browser.zoom.siteSpecific", false);
+	var svc = Components.classes["@mozilla.org/preferences-service;1"].getService(
+		Components.interfaces.nsIPrefService);
+	svc.QueryInterface(Components.interfaces.nsIPrefBranch);
+	originalSiteSpecific = svc.getBoolPref("browser.zoom.siteSpecific");
+	svc.setBoolPref("browser.zoom.siteSpecific", false);
 }
 
 function unloadAddon() {
-    Services.mm.removeDelayedFrameScript("chrome://zoomlevel/content/frame.js");
-    restoreSiteSpecific();
-    tabWatcher.destroy();
-    mouseScroller.destroy();
-    ui.destroy();
+	Services.mm.removeDelayedFrameScript("chrome://zoomlevel/content/frame.js");
+	restoreSiteSpecific();
+	tabWatcher.destroy();
+	mouseScroller.destroy();
+	ui.destroy();
 }
 
 //restore browser.zoom.siteSpecific value
 function restoreSiteSpecific(){
-    var svc = Components.classes["@mozilla.org/preferences-service;1"].getService(
-        Components.interfaces.nsIPrefService);
-    svc.QueryInterface(Components.interfaces.nsIPrefBranch);
-    svc.setBoolPref("browser.zoom.siteSpecific", originalSiteSpecific);
+	var svc = Components.classes["@mozilla.org/preferences-service;1"].getService(
+		Components.interfaces.nsIPrefService);
+	svc.QueryInterface(Components.interfaces.nsIPrefBranch);
+	svc.setBoolPref("browser.zoom.siteSpecific", originalSiteSpecific);
 }
 
 function install(data) {
-    /** Present here only to avoid warning on addon installation **/
+	/** Present here only to avoid warning on addon installation **/
 }
 
 function uninstall(aData, aReason) {
-    if (aReason == ADDON_UNINSTALL) {
-        Services.prefs.deleteBranch("extensions.zoomlevel.");
-    }
+	if (aReason == ADDON_UNINSTALL) {
+		Services.prefs.deleteBranch("extensions.zoomlevel.");
+	}
 }
